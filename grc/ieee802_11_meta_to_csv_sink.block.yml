@@ -1,0 +1,27 @@
+id: ieee802_11_meta_to_csv_sink
+label: Meta to CSV Sink
+category: '[IEEE802.11]'
+
+templates:
+  imports: import ieee802_11
+  make: ieee802_11.meta_to_csv_sink(${file_path}, ${keys}, ${delimiter})
+
+parameters:
+- id: file_path
+  label: File
+  dtype: file_save
+- id: keys
+  label: Keys
+  dtype: raw
+  default: ["key 1", "key 2"]
+- id: delimiter
+  label: Delimiter
+  dtype: string
+  default: ","
+
+inputs:
+- label: pdu in
+  domain: message
+  optional: 0
+
+file_format: 1

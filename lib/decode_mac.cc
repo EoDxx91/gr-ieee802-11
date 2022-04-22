@@ -74,6 +74,7 @@ public:
 
                 // Enter tags into metadata dictionary
                 d_meta = pmt::make_dict();
+                d_drop_info = pmt::make_dict();
                 for (auto tag : tags)
                     d_meta = pmt::dict_add(d_meta, tag.key, tag.value);
 
@@ -139,9 +140,14 @@ public:
 
         // skip service field
         boost::crc_32_type result;
-        result.process_bytes(out_bytes + 2, d_frame.psdu_size);
-        if (result.checksum() != 558161692) {
-            dout << "checksum wrong -- dropping" << std::endl;
+        result.process_bytes(out_bytes + 2, d_frame.psdu_size - 4);
+        
+        u_int32_t msgChecksum;
+        memcpy(&msgChecksum, out_bytes + 2 + d_frame.psdu_size - 4, sizeof(uint32_t));
+        if (result.checksum() != msgChecksum) {
+            std::cout << "RX Calculated Checksum: " << result.checksum() << std::endl;
+            std::cout << "RX Message Checksum: " << msgChecksum << std::endl;
+            std::cout << "checksum wrong -- dropping" << std::endl;
             return;
         }
 
@@ -232,6 +238,8 @@ public:
 private:
     bool d_debug;
     bool d_log;
+
+    int message_count = 0;
 
     pmt::pmt_t d_meta;
 

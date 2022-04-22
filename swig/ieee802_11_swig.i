@@ -32,6 +32,7 @@
 #include "ieee802_11/frame_equalizer.h"
 #include "ieee802_11/mac.h"
 #include "ieee802_11/mapper.h"
+#include "ieee802_11/meta_to_csv_sink.h"
 #include "ieee802_11/parse_mac.h"
 #include "ieee802_11/signal_field.h"
 #include "ieee802_11/sync_long.h"
@@ -51,6 +52,7 @@
 %include "ieee802_11/ether_encap.h"
 %include "ieee802_11/extract_csi.h"
 %include "ieee802_11/frame_equalizer.h"
+%include "ieee802_11/meta_to_csv_sink.h"
 %include "ieee802_11/mac.h"
 %include "ieee802_11/mapper.h"
 %include "ieee802_11/parse_mac.h"
@@ -63,6 +65,7 @@ GR_SWIG_BLOCK_MAGIC2(ieee802_11, decode_mac);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, ether_encap);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, extract_csi);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, frame_equalizer);
+GR_SWIG_BLOCK_MAGIC2(ieee802_11, meta_to_csv_sink);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, mac);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, mapper);
 GR_SWIG_BLOCK_MAGIC2(ieee802_11, parse_mac);

@@ -27,6 +27,7 @@ list(APPEND include_sources
     ether_encap.h
     extract_csi.h
     frame_equalizer.h
+    meta_to_csv_sink.h
     mac.h
     mapper.h
     parse_mac.h
