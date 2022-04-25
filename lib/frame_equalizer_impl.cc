@@ -40,7 +40,6 @@ frame_equalizer::sptr frame_equalizer::make(Equalizer algo,
         algo, freq, bw, noise_level, tx_snr, numb_messages, log, debug));
 }
 
-
 frame_equalizer_impl::frame_equalizer_impl(Equalizer algo,
                                            double freq,
                                            double bw,
