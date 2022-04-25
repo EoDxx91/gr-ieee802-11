@@ -47,7 +47,7 @@ frame_equalizer_impl::frame_equalizer_impl(
       d_freq(freq),
       d_bw(bw),
       d_noise_level(1.0),
-      d_rx_snr(1.0),
+      d_tx_snr(1.0),
       d_numb_messages(10),
       d_frame_bytes(0),
       d_frame_symbols(0),
