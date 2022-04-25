@@ -31,7 +31,7 @@ frame_equalizer::sptr
 frame_equalizer::make(Equalizer algo, double freq, double bw, double noise_level, double tx_snr, int numb_messages, bool log, bool debug)
 {
     return gnuradio::get_initial_sptr(
-        new frame_equalizer_impl(algo, freq, bw, noise_level, rx_snr, numb_messages, log, debug));
+        new frame_equalizer_impl(algo, freq, bw, noise_level, tx_snr, numb_messages, log, debug));
 }
 
 
