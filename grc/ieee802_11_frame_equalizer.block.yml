@@ -19,6 +19,10 @@ parameters:
     label: Bandwidth
     dtype: real
     default: 10e6
+-   id: noise_level
+    label: Noise Level
+    dtype: real
+    default: 2e1
 -   id: tx_snr
     label: Transmit Signal to Noise Ratio
     dtype: real
@@ -27,10 +31,6 @@ parameters:
     label: Number of Messages
     dtype: int
     default: '10'
--   id: noise_level
-    label: Noise Level
-    dtype: real
-    default: 2e1
 -   id: log
     label: Log
     dtype: bool
@@ -61,7 +61,7 @@ outputs:
 
 templates:
     imports: import ieee802_11
-    make: ieee802_11.frame_equalizer(${algo}, ${freq}, ${bw}, ${log}, ${debug})
+    make: ieee802_11.frame_equalizer(${algo}, ${freq}, ${bw}, ${noise_level}, ${tx_snr}, ${numb_messages}, ${log}, ${debug})
     callbacks:
     - set_algorithm(${algo})
     - set_frequency(${freq})
