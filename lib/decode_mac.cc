@@ -74,7 +74,6 @@ public:
 
                 // Enter tags into metadata dictionary
                 d_meta = pmt::make_dict();
-                d_drop_info = pmt::make_dict();
                 for (auto tag : tags)
                     d_meta = pmt::dict_add(d_meta, tag.key, tag.value);
 
