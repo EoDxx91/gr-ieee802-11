@@ -30,7 +30,7 @@ class frame_equalizer_impl : virtual public frame_equalizer
 {
 
 public:
-    frame_equalizer_impl(Equalizer algo, double freq, double bw, bool log, bool debug);
+    frame_equalizer_impl(Equalizer algo, double freq, double bw, double noise_level, double rx_snr, int numb_messages, bool log, bool debug);
     ~frame_equalizer_impl();
 
     void set_algorithm(Equalizer algo);
@@ -62,11 +62,15 @@ private:
     double d_bw;                        // Hz
     double d_er;
     double d_epsilon0;
+    double d_noise_level;
+    double d_tx_snr;
+    
     gr_complex d_prev_pilots[4];
 
     int d_frame_bytes;
     int d_frame_symbols;
     int d_frame_encoding;
+    int d_numb_messages;
 
     uint8_t d_deinterleaved[48];
     gr_complex symbols[48];

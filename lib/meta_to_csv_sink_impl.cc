@@ -50,6 +50,13 @@ meta_to_csv_sink_impl::meta_to_csv_sink_impl(const char* file_path,
 
     for (int i = 0; i < keys.size(); i++)
         pmt::vector_set(d_keys, i, pmt::mp(keys[i]));
+    
+    // Add the header information as the first line in the CSV for ease
+    // of parsing in Pandas
+    d_file << pmt::vector_ref(d_keys, 0);
+    for (int i = 1; i < pmt::length(d_keys); i++)
+        d_file << d_delimiter << pmt::vector_ref(d_keys, i);
+    d_file << std::endl;
 
     message_port_register_in(pmt::mp("pdu in"));
     set_msg_handler(pmt::mp("pdu in"),

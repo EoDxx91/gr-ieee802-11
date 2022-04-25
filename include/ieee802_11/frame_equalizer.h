@@ -38,7 +38,7 @@ class IEEE802_11_API frame_equalizer : virtual public gr::block
 
 public:
     typedef boost::shared_ptr<frame_equalizer> sptr;
-    static sptr make(Equalizer algo, double freq, double bw, bool log, bool debug);
+    static sptr make(Equalizer algo, double freq, double bw, double noise_level, double tx_snr, int numb_messages, bool log, bool debug);
     virtual void set_algorithm(Equalizer algo) = 0;
     virtual void set_bandwidth(double bw) = 0;
     virtual void set_frequency(double freq) = 0;

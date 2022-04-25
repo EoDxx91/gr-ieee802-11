@@ -19,6 +19,18 @@ parameters:
     label: Bandwidth
     dtype: real
     default: 10e6
+-   id: tx_snr
+    label: Transmit Signal to Noise Ratio
+    dtype: real
+    default: 10e1
+-   id: numb_messages
+    label: Number of Messages
+    dtype: int
+    default: '10'
+-   id: noise_level
+    label: Noise Level
+    dtype: real
+    default: 2e1
 -   id: log
     label: Log
     dtype: bool

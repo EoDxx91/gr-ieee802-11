@@ -28,15 +28,15 @@ namespace gr {
 namespace ieee802_11 {
 
 frame_equalizer::sptr
-frame_equalizer::make(Equalizer algo, double freq, double bw, bool log, bool debug)
+frame_equalizer::make(Equalizer algo, double freq, double bw, double noise_level, double tx_snr, int numb_messages, bool log, bool debug)
 {
     return gnuradio::get_initial_sptr(
-        new frame_equalizer_impl(algo, freq, bw, log, debug));
+        new frame_equalizer_impl(algo, freq, bw, noise_level, rx_snr, numb_messages, log, debug));
 }
 
 
 frame_equalizer_impl::frame_equalizer_impl(
-    Equalizer algo, double freq, double bw, bool log, bool debug)
+    Equalizer algo, double freq, double bw, double noise_level, double tx_snr, int numb_messages, bool log, bool debug)
     : gr::block("frame_equalizer",
                 gr::io_signature::make(1, 1, 64 * sizeof(gr_complex)),
                 gr::io_signature::make(1, 1, 48)),
@@ -46,6 +46,9 @@ frame_equalizer_impl::frame_equalizer_impl(
       d_equalizer(NULL),
       d_freq(freq),
       d_bw(bw),
+      d_noise_level(1.0),
+      d_rx_snr(1.0),
+      d_numb_messages(10),
       d_frame_bytes(0),
       d_frame_symbols(0),
       d_freq_offset_from_synclong(0.0)
@@ -225,7 +228,13 @@ int frame_equalizer_impl::general_work(int noutput_items,
                 dict = pmt::dict_add(
                     dict, pmt::mp("snr"), pmt::from_double(d_equalizer->get_snr()));
                 dict = pmt::dict_add(
-                    dict, pmt::mp("nominal frequency"), pmt::from_double(d_freq));
+                    dict, pmt::mp("nominal frequency"), pmt::mp(d_freq));
+                dict = pmt::dict_add(
+                    dict, pmt::mp("numb_messages"), pmt::mp(d_numb_messages));
+                dict = pmt::dict_add(
+                    dict, pmt::mp("tx_snr"), pmt::mp(d_tx_snr));
+                dict = pmt::dict_add(
+                    dict, pmt::mp("noise_level"), pmt::mp(d_noise_level));
                 dict = pmt::dict_add(dict,
                                      pmt::mp("frequency offset"),
                                      pmt::from_double(d_freq_offset_from_synclong));
