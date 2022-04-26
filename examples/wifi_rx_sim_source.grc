@@ -174,6 +174,18 @@ blocks:
     coordinate: [176, 12.0]
     rotation: 0
     state: enabled
+- name: noise_level
+  id: variable
+  parameters:
+    comment: ''
+    value: '2.0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [16, 228.0]
+    rotation: 0
+    state: enabled
 - name: out_buf_size
   id: variable
   parameters:
@@ -225,7 +237,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [8, 133]
+    coordinate: [8, 156.0]
     rotation: 0
     state: enabled
 - name: window_size
@@ -245,7 +257,7 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '2.0'
+    amp: '1'
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
@@ -614,7 +626,7 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'True'
+    log: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -637,6 +649,9 @@ blocks:
     log: 'True'
     maxoutbuf: '0'
     minoutbuf: '0'
+    noise_level: noise_level
+    numb_messages: messages
+    tx_snr: 10e1
   states:
     bus_sink: false
     bus_source: false
@@ -662,6 +677,23 @@ blocks:
     coordinate: [472, 228.0]
     rotation: 0
     state: enabled
+- name: ieee802_11_meta_to_csv_sink_0
+  id: ieee802_11_meta_to_csv_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    delimiter: ','
+    file_path: /home/user1/workspace/pybombs/target/src/gr-ieee-80211/data/meta_data.csv
+    keys: '[''sequence number'', ''timestamp'', ''snr'', ''nominal frequency'', ''tx_snr'',
+      ''noise_level'', ''numb_messages'']'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1536, 1296.0]
+    rotation: 0
+    state: true
 - name: ieee802_11_parse_mac_0
   id: ieee802_11_parse_mac
   parameters:
@@ -669,7 +701,7 @@ blocks:
     alias: ''
     comment: ''
     debug: 'False'
-    log: 'True'
+    log: 'False'
     maxoutbuf: '0'
     minoutbuf: '0'
   states:
@@ -751,7 +783,7 @@ blocks:
     label: ''
     short_id: n
     type: intx
-    value: '100'
+    value: '5000'
   states:
     bus_sink: false
     bus_source: false
@@ -768,7 +800,7 @@ blocks:
     label: ''
     short_id: l
     type: intx
-    value: '435'
+    value: '1000'
   states:
     bus_sink: false
     bus_source: false
@@ -991,7 +1023,7 @@ blocks:
     label: ''
     short_id: s
     type: eng_float
-    value: '10'
+    value: '6'
   states:
     bus_sink: false
     bus_source: false
@@ -1050,6 +1082,7 @@ connections:
 - [ieee802_11_frame_equalizer_0, symbols, blocks_pdu_to_tagged_stream_1, pdus]
 - [ieee802_11_mac_0, phy out, wifi_phy_hier, mac_in]
 - [ieee802_11_parse_mac_0, out, foo_wireshark_connector_1, in]
+- [ieee802_11_parse_mac_0, out, ieee802_11_meta_to_csv_sink_0, pdu in]
 - [ieee802_11_sync_long_0, '0', blocks_stream_to_vector_0, '0']
 - [ieee802_11_sync_short_0, '0', blocks_delay_0, '0']
 - [ieee802_11_sync_short_0, '0', ieee802_11_sync_long_0, '0']
