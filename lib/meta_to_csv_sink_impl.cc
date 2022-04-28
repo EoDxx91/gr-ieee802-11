@@ -1,6 +1,5 @@
 /* -*- c++ -*- */
-/*
- * Copyright 2021 Anton Ottosson.
+/* Copyright 2022 Johns Hopkins University Applied Physics Laboratory.
  *
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
